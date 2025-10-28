@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import Button from '@/components/Button';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState, useRef, useEffect } from 'react';
+import Button from "@/components/Button";
+import Image from "next/image";
+import Link from "next/link";
+import { useState, useRef, useEffect } from "react";
 
 const navItems = [
   {
-    name: 'О нас',
-    href: '#about',
+    name: "О нас",
+    href: "#about",
   },
   {
-    name: 'Услуги',
-    href: '#services',
+    name: "Услуги",
+    href: "#services",
   },
   {
-    name: 'Контакты',
-    href: '#contacts',
+    name: "Контакты",
+    href: "#contacts",
   },
 ];
 
-function Header() {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -32,9 +32,9 @@ function Header() {
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -51,7 +51,9 @@ function Header() {
             <p className="font-neucha text-2xl md:text-3xl lg:text-4xl">
               Учёный кот
             </p>
-            <p className="text-xs sm:text-base text-[var(--secondary)]">Студия раннего развития</p>
+            <p className="text-xs sm:text-base text-[var(--secondary)]">
+              Студия раннего развития
+            </p>
           </div>
         </div>
         <div className="hidden lg:block">
@@ -71,7 +73,7 @@ function Header() {
           <button
             onClick={toggleMenu}
             className="p-2 hover:bg-gray-100 rounded-md transition-colors"
-            aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
+            aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
             aria-expanded={isMenuOpen}
             aria-haspopup="true"
           >
@@ -97,8 +99,8 @@ function Header() {
           <div
             className={`absolute text-xl right-0 w-auto top-full mt-2 px-4 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50 transition-all duration-200 ease-in-out ${
               isMenuOpen
-                ? 'opacity-100 visible transform translate-y-0'
-                : 'opacity-0 invisible transform -translate-y-2'
+                ? "opacity-100 visible transform translate-y-0"
+                : "opacity-0 invisible transform -translate-y-2"
             }`}
             role="menu"
             aria-hidden={!isMenuOpen}
@@ -123,6 +125,6 @@ function Header() {
       </div>
     </header>
   );
-}
+};
 
 export default Header;
