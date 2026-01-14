@@ -25,7 +25,7 @@ const Hero = () => {
           Детская студия
         </p>
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[var(--foreground)] leading-tight">
-          &quot;Учёный кот&quot;
+          &quot;Учёный Кот&quot;
         </h1>
       </div>
       <div className="text-center max-w-2xl">
