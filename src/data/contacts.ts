@@ -4,8 +4,9 @@ export const phoneNumbers: string[] = [
 ];
 
 export const emailAddress: string = "info@uchkot.ru";
+export const vkLink: string = "https://vk.com/kot_yo";
 
-export const address: string = 'ул. Петрова, 2а, ТЦ "Глобус", Йошкар-Ола';
+export const address: string = 'ул. Петрова, 2а, ТЦ "Глобус", каб. 224, г. Йошкар-Ола';
 
 export type OpeningHoursItem = {
   days: string;
@@ -13,11 +14,11 @@ export type OpeningHoursItem = {
 };
 
 export const openingHours: OpeningHoursItem[] = [
-  { days: "Пн - Пт", hours: "9:00 - 19:00" },
+  { days: "Пн - Пт", hours: "9:00 - 20:00" },
   { days: "Сб", hours: "10:00 - 16:00" },
   { days: "Вс", hours: "Выходной" },
 ];
 
-export const organizationName = "Ученый кот";
+export const organizationName = "Ученый Кот";
 
 

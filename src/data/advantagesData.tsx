@@ -47,7 +47,7 @@ export const advantages: Advantage[] = [
   },
   {
     title: "Современные методики",
-    description: "Игровые форматы, STEAM и проектное обучение",
+    description: "Игровые форматы, творчество и обучение",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M11 2h2v10h-2z" />
