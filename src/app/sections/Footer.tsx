@@ -8,8 +8,7 @@ export const FooterVariant3 = () => {
   return (
     <footer className="bg-gradient-to-b from-white to-[var(--background)] border-t border-gray-200">
       <div className="container mx-auto max-w-5xl px-4 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
-          {/* Левая колонка - О студии */}
+        <div className="flex flex-col gap-8 mb-8">
           <div>
             <div className="flex items-center gap-3 mb-6">
               <Image src="/logo.png" alt="logo" width={50} height={50} />

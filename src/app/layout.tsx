@@ -5,14 +5,14 @@ import "./globals.css";
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["cyrillic"],
-  display: "swap"
+  display: "swap",
 });
 
 const neucha = Neucha({
   variable: "--font-neucha",
   subsets: ["cyrillic"],
   weight: ["400"],
-  display: "swap"
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -27,33 +27,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className="scroll-smooth">
-      <body
-        className={`${roboto.variable} ${neucha.variable} antialiased`}
-      >
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Ученый кот",
-              url: "https://uchkot.ru",
-              email: "info@uchkot.ru",
-              telephone: ["+7-927-680-06-22", "+7-902-103-19-03"],
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "ул. Петрова, 2а, ТЦ \"Глобус\"",
-                addressLocality: "Йошкар-Ола",
-                addressCountry: "RU",
-              },
-              openingHours: [
-                "Mo-Fr 09:00-19:00",
-                "Sa 10:00-16:00",
-                "Su Closed",
-              ],
-            }),
-          }}
-        />
+      <body className={`${roboto.variable} ${neucha.variable} antialiased`}>
+        <div
+          itemScope
+          itemType="https://schema.org/LocalBusiness"
+          className="hidden" // Скрываем разметку от отображения
+        >
+          <meta itemProp="name" content="Ученый кот" />
+          <link itemProp="url" href="https://uchkot.ru" />
+          <img itemProp="logo" src="https://uchkot.ru/logo.png" alt="Логотип Учёного кота" />
+          <meta itemProp="email" content="info@uchkot.ru" />
+          <meta itemProp="telephone" content="+7-927-680-06-22" />
+
+          
+          <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+            <meta itemProp="streetAddress" content="ул. Петрова, 2а, ТЦ «Глобус»" />
+            <meta itemProp="addressLocality" content="Йошкар-Ола" />
+            <meta itemProp="addressRegion" content="Марий Эл" />
+            <meta itemProp="postalCode" content="424000" />
+            <meta itemProp="addressCountry" content="RU" />
+          </div>
+
+          <meta itemProp="openingHours" content="Mo-Fr 09:00-20:00,Sa 10:00-16:00,Su closed" />
+          <meta itemProp="description" content="Студия раннего развития, детская студия" />
+        </div>
+
         {children}
       </body>
     </html>

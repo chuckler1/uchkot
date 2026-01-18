@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import { cva } from "class-variance-authority";
 
 const buttonVariants = cva("border p-2 px-4 rounded-md font-medium w-full sm:w-auto", {
@@ -13,7 +13,7 @@ const buttonVariants = cva("border p-2 px-4 rounded-md font-medium w-full sm:w-a
 export default function Button(
     props: {
         variant: "primary" | "secondary";
-    } & HTMLAttributes<HTMLButtonElement>
+    } & ButtonHTMLAttributes<HTMLButtonElement>
 ): React.JSX.Element {
     const { variant, className, ...otherProps } = props;
     return (
