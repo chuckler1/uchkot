@@ -8,6 +8,7 @@ interface FormData {
   phone: string;
   email: string;
   lesson: string;
+  website: string; // honeypot (скрытое поле)
 }
 
 export default function ContactForm(): React.JSX.Element {
@@ -16,6 +17,7 @@ export default function ContactForm(): React.JSX.Element {
     phone: "",
     email: "",
     lesson: "",
+    website: "",
   });
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -41,9 +43,17 @@ export default function ContactForm(): React.JSX.Element {
 
       if (res.ok) {
         alert("Заявка отправлена!");
-        setFormData({ name: "", phone: "", email: "", lesson: "" });
+        setFormData({ name: "", phone: "", email: "", lesson: "", website: "" });
       } else {
-        setError("Ошибка отправки. Поробуйте еще раз");
+        const data: unknown = await res.json().catch(() => null);
+        const message =
+          typeof data === "object" &&
+          data !== null &&
+          "error" in data &&
+          typeof (data as { error?: unknown }).error === "string"
+            ? (data as { error: string }).error
+            : "Ошибка отправки. Попробуйте еще раз";
+        setError(message);
       }
     } catch {
       setError("Ошибка сети. Проверьте подключение");
@@ -56,6 +66,18 @@ export default function ContactForm(): React.JSX.Element {
       <h3 className="text-xl font-semibold text-[var(--foreground)] mb-4">
         Записаться на пробное занятие
       </h3>
+      {/* honeypot: скрытое поле против спам-ботов */}
+      <div className="hidden" aria-hidden>
+        <Input
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={handleChange}
+          placeholder="Ваш сайт"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
       <Input
         type="text"
         name="name"
