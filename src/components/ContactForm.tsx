@@ -45,7 +45,7 @@ export default function ContactForm(): React.JSX.Element {
       } else {
         setError("Ошибка отправки. Поробуйте еще раз");
       }
-    } catch (err) {
+    } catch {
       setError("Ошибка сети. Проверьте подключение");
     }
 

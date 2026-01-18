@@ -35,7 +35,7 @@ export default function RootLayout({
         >
           <meta itemProp="name" content="Ученый кот" />
           <link itemProp="url" href="https://uchkot.ru" />
-          <img itemProp="logo" src="https://uchkot.ru/logo.png" alt="Логотип Учёного кота" />
+          <meta itemProp="logo" content="https://uchkot.ru/logo.png" />
           <meta itemProp="email" content="info@uchkot.ru" />
           <meta itemProp="telephone" content="+7-927-680-06-22" />
 
