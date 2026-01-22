@@ -37,6 +37,38 @@ function isEmailValid(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+async function sendTelegramMessage(params: {
+  token: string;
+  chatId: string;
+  text: string;
+  timeoutMs?: number;
+}): Promise<void> {
+  const { token, chatId, text, timeoutMs = 5000 } = params;
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        disable_web_page_preview: true,
+      }),
+      signal: controller.signal,
+    });
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Telegram sendMessage failed: ${res.status} ${res.statusText} ${body}`);
+    }
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
 function rateLimitCheck(key: string): { ok: true } | { ok: false; retryAfterSec: number } {
   const now = Date.now();
   const existing = rateLimit.get(key);
@@ -129,21 +161,20 @@ export async function POST(req: NextRequest) {
   const tgChatId = process.env.TG_CHAT_ID;
   if (tgToken && tgChatId) {
     try {
+      const ts = new Date().toISOString();
       const text = [
         "Новая заявка с сайта:",
         `Имя: ${name}`,
         `Телефон: ${phone}`,
         email ? `Email: ${email}` : null,
         lesson ? `Занятие: ${lesson}` : null,
+        `IP: ${ip}`,
+        `Время: ${ts}`,
       ]
         .filter(Boolean)
         .join("\n");
 
-      await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: tgChatId, text }),
-      });
+      await sendTelegramMessage({ token: tgToken, chatId: tgChatId, text });
     } catch (e) {
       console.error("[contact] telegram send failed", e);
       // не валим заявку — просто логируем

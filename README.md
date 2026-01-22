@@ -20,6 +20,15 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Contact form → Telegram notifications
+
+The API route `POST /api/contact` can send a Telegram message when environment variables are set:
+
+- **`TG_BOT_TOKEN`**: Bot token from `@BotFather`
+- **`TG_CHAT_ID`**: Your chat id (or group id)
+
+When **both** variables are present, the route will try to call Telegram `sendMessage`. If Telegram fails, the request still returns `200` and the error is only logged (so the lead is not lost).
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
