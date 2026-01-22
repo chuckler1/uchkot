@@ -5,6 +5,7 @@ import { Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const navItems = [
   {
@@ -24,7 +25,8 @@ const navItems = [
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
+  const router = useRouter();
+  const goToContacts = () => router.push("/#contacts");
   // Закрытие меню при клике вне его
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -100,11 +102,21 @@ function Header() {
                 {item.name}
               </Link>
             ))}
-            <Button variant="primary">Записаться</Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                setIsMenuOpen(false);
+                goToContacts();
+              }}
+            >
+              Записаться
+            </Button>
           </div>
         </div>
         <div className="hidden lg:block">
-          <Button variant="primary">Записаться</Button>
+          <Button variant="primary" onClick={goToContacts}>
+            Записаться
+          </Button>
         </div>
       </div>
     </header>

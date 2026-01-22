@@ -1,7 +1,13 @@
+'use client';
+
 import React from 'react';
 import Button from '@/components/Button';
+import { useRouter } from 'next/navigation';
 
 const Hero = () => {
+  const router = useRouter();
+  const goToContacts = () => router.push("/#contacts");
+  const goToAbout = () => router.push("/#about");
   return (
     <section className="container mx-auto max-w-5xl flex flex-col items-center gap-6 p-6 my-20">
       <div className="flex items-center justify-center gap-3 bg-[var(--foreground)]/5 rounded-full px-4 py-2">
@@ -99,10 +105,10 @@ const Hero = () => {
         </div>
       </div>
       <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
-        <Button variant="primary">
+        <Button variant="primary" onClick={goToContacts}>
           Записаться на пробное занятие
         </Button>
-        <Button variant="secondary">
+        <Button variant="secondary" onClick={goToAbout}>
           Узнать больше
         </Button>
       </div>
