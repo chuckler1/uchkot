@@ -1,45 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Uchkot
 
-## Getting Started
+Сайт на **Next.js** (App Router).
 
-First, run the development server:
+### Локальный запуск
+
+1) Установить зависимости:
+
+```bash
+npm install
+```
+
+2) Запустить dev-сервер:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Открой `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Сборка (prod)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Contact form → Telegram notifications
+### Заявка с сайта → Telegram
 
-The API route `POST /api/contact` can send a Telegram message when environment variables are set:
+Форма отправляет данные на `POST /api/contact`.
 
-- **`TG_BOT_TOKEN`**: Bot token from `@BotFather`
-- **`TG_CHAT_ID`**: Your chat id (or group id)
+Чтобы включить уведомления в Telegram, задай переменные окружения:
+- `TG_BOT_TOKEN` — токен бота (выдаёт `@BotFather`)
+- `TG_CHAT_ID` — id чата/группы, куда слать сообщения
 
-When **both** variables are present, the route will try to call Telegram `sendMessage`. If Telegram fails, the request still returns `200` and the error is only logged (so the lead is not lost).
+Как получить `TG_CHAT_ID` (самый простой способ):
+1) Напиши боту в Telegram (Start → любое сообщение)
+2) Открой в браузере:
+   `https://api.telegram.org/bot<TOKEN>/getUpdates`
+3) В ответе найди `chat.id`
 
-## Learn More
+### Деплой на Amvera (через GitHub)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1) Запушь проект в GitHub.
+2) В Amvera создай приложение (тип: **Приложение**).
+3) Подключи GitHub репозиторий (может попросить `github_pat_...` токен).
+4) Убедись, что в репозитории есть `amvera.yaml` (лежит в корне проекта).
+5) В Amvera добавь переменные окружения (`TG_BOT_TOKEN`, `TG_CHAT_ID`), если нужны.
