@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "npm run open-browser && next dev --turbopack",
     "open-browser": "open http://localhost:3000",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build && node scripts/amvera-postbuild.mjs",
+    "start": "node .next/standalone/server.js",
     "lint": "eslint"
   },
   "dependencies": {
