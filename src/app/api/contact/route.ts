@@ -161,7 +161,7 @@ export async function POST(req: NextRequest) {
   const tgChatId = process.env.TG_CHAT_ID;
   if (tgToken && tgChatId) {
     try {
-      const ts = new Date().toLocaleString();
+      const ts = new Date().toLocaleString("ru-RU", { timeZone: "Europe/Moscow" });
       const text = [
         "Новая заявка с сайта:",
         `Имя: ${name}`,
