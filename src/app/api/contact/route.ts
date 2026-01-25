@@ -151,7 +151,7 @@ export async function POST(req: NextRequest) {
     email: email || undefined,
     lesson: lesson || undefined,
     ip,
-    ts: new Date().toISOString(),
+    ts: new Date().toLocaleString(),
   });
 
   // Telegram-уведомление. Работает, если заданы переменные окружения.
@@ -161,7 +161,7 @@ export async function POST(req: NextRequest) {
   const tgChatId = process.env.TG_CHAT_ID;
   if (tgToken && tgChatId) {
     try {
-      const ts = new Date().toISOString();
+      const ts = new Date().toLocaleString();
       const text = [
         "Новая заявка с сайта:",
         `Имя: ${name}`,

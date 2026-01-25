@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import Button from '@/components/Button';
-import { Menu } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState, useRef, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import Button from "@/components/Button";
+import { Menu } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const navItems = [
   {
-    name: 'О нас',
-    href: '#about',
+    name: "О нас",
+    href: "#about",
   },
   {
-    name: 'Услуги',
-    href: '#services',
+    name: "Услуги",
+    href: "#services",
   },
   {
-    name: 'Контакты',
-    href: '#contacts',
+    name: "Контакты",
+    href: "#contacts",
   },
 ];
 
@@ -35,9 +35,9 @@ function Header() {
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -54,7 +54,9 @@ function Header() {
             <p className="font-neucha text-2xl md:text-3xl lg:text-4xl">
               Учёный Кот
             </p>
-            <p className="text-xs sm:text-base text-[var(--secondary)]">Студия раннего развития</p>
+            <p className="text-xs sm:text-base text-[var(--secondary)]">
+              Студия раннего развития
+            </p>
           </div>
         </div>
         <div className="hidden lg:block">
@@ -73,8 +75,13 @@ function Header() {
         <div className="menu relative lg:hidden" ref={menuRef}>
           <button
             onClick={toggleMenu}
-            className="p-2 hover:bg-gray-100 rounded-md transition-colors"
-            aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
+            className={`p-2 rounded-xl transition-colors
+              backdrop-blur-[3px]
+              hover:bg-black/5 active:bg-black/10
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20
+              ${isMenuOpen ? "bg-black/5 ring-1 ring-black/10" : ""}
+            `}
+            aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
             aria-expanded={isMenuOpen}
             aria-haspopup="true"
           >
@@ -83,34 +90,48 @@ function Header() {
 
           {/* Выпадающее меню. */}
           <div
-            className={`absolute text-xl right-0 w-auto top-full mt-2 px-4 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50 transition-all duration-200 ease-in-out ${
-              isMenuOpen
-                ? 'opacity-100 visible transform translate-y-0'
-                : 'opacity-0 invisible transform -translate-y-2'
-            }`}
+            className={`absolute right-0 top-full mt-3 w-72 z-50
+              overflow-hidden rounded-2xl
+              border border-white/35 ring-1 ring-white/25
+              bg-neutral-400/20 backdrop-blur-[3px]
+              shadow-[0_18px_70px_rgba(0,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.55)]
+              before:pointer-events-none before:absolute before:inset-0 before:z-0
+              before:bg-[radial-gradient(120%_100%_at_0%_0%,rgba(255,255,255,0.45)_0%,rgba(255,255,255,0.14)_35%,rgba(255,255,255,0)_70%)]
+              after:pointer-events-none after:absolute after:inset-0 after:z-0 after:opacity-25
+              after:bg-[linear-gradient(0deg,rgba(255,255,255,0.20),rgba(255,255,255,0)_30%,rgba(255,255,255,0)_70%,rgba(255,255,255,0.16)),url('/noise.svg')]
+              after:mix-blend-overlay
+              origin-top-right transition-all duration-200 ease-out
+              ${isMenuOpen ? "opacity-100 visible translate-y-0 scale-100" : "opacity-0 invisible -translate-y-2 scale-[0.98]"}
+            `}
             role="menu"
             aria-hidden={!isMenuOpen}
           >
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="block px-4 py-2 text-[var(--foreground)] hover:bg-gray-100 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-                role="menuitem"
-              >
-                {item.name}
-              </Link>
-            ))}
-            <Button
-              variant="primary"
-              onClick={() => {
-                setIsMenuOpen(false);
-                goToContacts();
-              }}
-            >
-              Записаться
-            </Button>
+            <div className="relative z-10 p-2">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block rounded-xl px-4 py-2 text-[var(--foreground)]
+                    hover:bg-white/30 active:bg-white/45 transition-colors
+                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                  onClick={() => setIsMenuOpen(false)}
+                  role="menuitem"
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <div className="mt-2 px-2 pb-1">
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    goToContacts();
+                  }}
+                >
+                  Записаться
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
         <div className="hidden lg:block">
