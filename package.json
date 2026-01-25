@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm run open-browser && next dev --turbopack",
     "open-browser": "open http://localhost:3000",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
