@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { organizationName } from "@/data/contacts";
 
-// Вариант 3: Footer с акцентом на контакты и карту
+// пше Простой футер с логотипом и ссылкой.
 export const FooterVariant3 = () => {
   return (
     <footer className="bg-gradient-to-b from-white to-[var(--background)] border-t border-gray-200">
@@ -43,7 +43,7 @@ export const FooterVariant3 = () => {
           </div>
         </div>
 
-        {/* Нижняя часть */}
+        {/* Нижняя часть футера. */}
         <div className="pt-8 border-t border-gray-200">
           <div className="flex justify-center">
             <p className="text-xs text-[var(--secondary)] text-center md:text-left">
@@ -56,7 +56,7 @@ export const FooterVariant3 = () => {
   );
 };
 
-// Экспорт компонента по умолчанию (можно выбрать любой вариант)
+// Экспортируем выбранный вариант футера.
 const Footer = FooterVariant3;
 
 export default Footer;

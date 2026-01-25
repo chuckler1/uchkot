@@ -8,7 +8,7 @@ interface FormData {
   phone: string;
   email: string;
   lesson: string;
-  website: string; // honeypot (скрытое поле)
+  website: string; // Honeypot: скрытое поле для защиты от ботов.
 }
 
 export default function ContactForm(): React.JSX.Element {
@@ -66,7 +66,7 @@ export default function ContactForm(): React.JSX.Element {
       <h3 className="text-xl font-semibold text-[var(--foreground)] mb-4">
         Записаться на пробное занятие
       </h3>
-      {/* honeypot: скрытое поле против спам-ботов */}
+      {/* Honeypot: скрытое поле для защиты от спам-ботов. */}
       <div className="hidden" aria-hidden>
         <Input
           type="text"

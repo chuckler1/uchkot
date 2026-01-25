@@ -12,17 +12,17 @@ const Scroller = () => {
   const resumeAfterWheelTimeoutRef = useRef<number | null>(null);
   const resumeAfterCardLeaveTimeoutRef = useRef<number | null>(null);
 
-  // синхронизируем state -> ref, чтобы не пересоздавать анимацию на каждом setState
+  // Синхронизируем state и ref, чтобы анимация не пересоздавалась при каждом setState.
   useEffect(() => {
     isPausedRef.current = isPaused;
   }, [isPaused]);
 
-  // Автопрокрутка (реальный scrollLeft), чтобы можно было и паузить на карточке, и крутить колесом
+  // Автопрокрутка: двигаем scrollLeft, чтобы работали пауза и прокрутка колесом.
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
-    // скорость: ~120px/сек (чтобы движение было заметно)
+    // Скорость прокрутки (~120px/сек), чтобы движение было заметно.
     const SPEED_PX_PER_MS = 0.12;
     let rafId = 0;
     let lastTs = performance.now();
@@ -35,9 +35,8 @@ const Scroller = () => {
       if (!isPausedRef.current && maxScrollLeft > 0) {
         const half = el.scrollWidth / 2;
 
-        // Если вторая "половина" действительно достижима (контент шире, чем половина),
-        // делаем бесконечный скролл в одну сторону за счёт дублирования списка.
-        // Иначе (очень широкий экран) используем пинг-понг внутри доступного диапазона.
+        // Если можем докрутить до середины, делаем бесконечный скролл (список продублирован).
+        // Если экран слишком широкий, скроллим туда-сюда (пинг-понг).
         if (half <= maxScrollLeft) {
           el.scrollLeft += dt * SPEED_PX_PER_MS;
           if (el.scrollLeft >= half) el.scrollLeft -= half;
@@ -66,25 +65,23 @@ const Scroller = () => {
     };
   }, []);
 
-  // Горизонтальный скролл колесиком мыши, пока курсор над скроллером
+  // Прокрутка колесом: переводим вертикальную прокрутку в горизонтальную.
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
     const onWheel = (e: WheelEvent) => {
-      // если горизонтального скролла нет — не мешаем странице скроллиться
+      // Если горизонтального скролла нет — не мешаем странице скроллиться.
       if (el.scrollWidth <= el.clientWidth) return;
 
-      // переводим deltaY в горизонтальный скролл (для мыши),
-      // но если есть deltaX (трекпад) — используем его
+      // Используем deltaY (мышь). Если есть deltaX (трекпад) — берём его.
       const primaryDelta =
         Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
 
       e.preventDefault();
       el.scrollLeft += primaryDelta;
 
-      // во время wheel-перемещения ставим на паузу авто-скролл,
-      // а затем возобновляем, если курсор не над карточкой
+      // Во время прокрутки колесом ставим паузу и включаем обратно чуть позже.
       setIsPaused(true);
       if (resumeAfterWheelTimeoutRef.current) {
         window.clearTimeout(resumeAfterWheelTimeoutRef.current);
@@ -111,7 +108,7 @@ const Scroller = () => {
 
   const handleCardLeave = () => {
     hoveringCardRef.current = false;
-    // небольшая задержка, чтобы при переходе между карточками не было "дёрганья"
+    // Небольшая задержка, чтобы при переходе между карточками не было дерганья.
     resumeAfterCardLeaveTimeoutRef.current = window.setTimeout(() => {
       if (!hoveringCardRef.current) setIsPaused(false);
     }, 60);
@@ -130,9 +127,9 @@ const Scroller = () => {
           </p>
         </div>
 
-        {/* Десктоп: авто-скролл + пауза на карточке + прокрутка колесом */}
+        {/* Десктоп: автоскролл + пауза на карточке + прокрутка колесом. */}
         <div className="relative w-full hidden md:block">
-          {/* Оверлеи НЕ внутри скролл-контейнера, чтобы не двигались вместе с контентом */}
+          {/* Градиенты вне скролл-контейнера, чтобы они не уезжали вместе с карточками. */}
           <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[var(--background)] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[var(--background)] to-transparent z-10 pointer-events-none" />
 
@@ -157,7 +154,7 @@ const Scroller = () => {
                       {card.description}
                     </p>
                     <div className="pt-2">
-                      {/* TODO: Добавить кнопку, когда появяться разделы с программами */}
+                      {/* TODO: Добавить кнопку, когда появятся страницы/разделы программ. */}
                       {/* <button className="text-[var(--foreground)] font-semibold hover:text-[var(--foreground)]/80 transition-colors flex items-center gap-2">
                         Узнать больше
                         <span className="transform transition-transform group-hover:translate-x-1">
@@ -172,7 +169,7 @@ const Scroller = () => {
           </div>
         </div>
 
-        {/* Мобильные/планшеты: статичный список без анимации */}
+        {/* Мобильные/планшеты: обычный список без автоскролла. */}
         <div className="md:hidden">
           <div className="grid grid-cols-1 gap-6 py-4">
             {programs.map((card) => (

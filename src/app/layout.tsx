@@ -31,7 +31,7 @@ export default function RootLayout({
         <div
           itemScope
           itemType="https://schema.org/LocalBusiness"
-          className="hidden" // Скрываем разметку от отображения
+          className="hidden" // Скрываем разметку, но оставляем её в HTML для поисковиков.
         >
           <meta itemProp="name" content="Ученый кот" />
           <link itemProp="url" href="https://uchkot.ru" />

@@ -6,8 +6,8 @@ type ContactPayload = {
   email?: string;
   lesson?: string;
   /**
-   * Honeypot поле против ботов: на фронте скрыто.
-   * Если заполнено — считаем отправку спамом.
+   * Honeypot-поле от ботов. На фронте оно скрыто.
+   * Если поле заполнено — считаем это спамом.
    */
   website?: string;
 };
@@ -25,7 +25,7 @@ function getClientIp(req: NextRequest): string {
 }
 
 function normalizePhone(phone: string): string {
-  // оставляем цифры и ведущий +
+  // Оставляем только цифры и ведущий плюс.
   const trimmed = phone.trim();
   const hasPlus = trimmed.startsWith("+");
   const digitsOnly = trimmed.replace(/[^\d]/g, "");
@@ -33,7 +33,7 @@ function normalizePhone(phone: string): string {
 }
 
 function isEmailValid(email: string): boolean {
-  // базовая проверка (не RFC-идеальная, но для формы достаточно)
+  // Простая проверка email. Для формы этого достаточно.
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
@@ -87,7 +87,7 @@ function rateLimitCheck(key: string): { ok: true } | { ok: false; retryAfterSec:
 }
 
 export async function POST(req: NextRequest) {
-  // простая защита от кросс-сайтовых POSTов
+  // Простая защита от кросс-сайтовых POST-запросов (проверяем Origin).
   const origin = req.headers.get("origin");
   const host = req.headers.get("host");
   if (origin && host) {
@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Forbidden" }, { status: 403 });
       }
     } catch {
-      // если origin не URL — игнорируем
+      // Если Origin не похож на URL — просто пропускаем проверку.
     }
   }
 
@@ -120,7 +120,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Некорректный JSON" }, { status: 400 });
   }
 
-  // honeypot
+  // Honeypot: если поле заполнено, отвечаем OK и не обрабатываем заявку.
   if (payload.website && payload.website.trim().length > 0) {
     return NextResponse.json({ ok: true }, { status: 200 });
   }
@@ -134,7 +134,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Укажите имя (2–80 символов)" }, { status: 400 });
   }
 
-  // минимум 6 цифр, максимум 20 (с +)
+  // В телефоне должно быть минимум 6 цифр и максимум 20 символов (с плюсиком).
   if (phone.replace(/[^\d]/g, "").length < 6 || phone.length > 20) {
     return NextResponse.json({ error: "Укажите корректный телефон" }, { status: 400 });
   }
@@ -143,8 +143,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Укажите корректный email" }, { status: 400 });
   }
 
-  // Тут вы выбираете действие: письмо/telegram/CRM/БД.
-  // Пока просто логируем (можно заменить на реальную интеграцию).
+  // Здесь можно отправлять заявку в Telegram/CRM/почту/БД.
+  // Пока просто пишем в лог.
   console.log("[contact] new lead", {
     name,
     phone,
@@ -154,7 +154,7 @@ export async function POST(req: NextRequest) {
     ts: new Date().toISOString(),
   });
 
-  // Пример Telegram (включится, если заданы env):
+  // Telegram-уведомление. Работает, если заданы переменные окружения.
   // TG_BOT_TOKEN=...
   // TG_CHAT_ID=...
   const tgToken = process.env.TG_BOT_TOKEN;
@@ -177,7 +177,7 @@ export async function POST(req: NextRequest) {
       await sendTelegramMessage({ token: tgToken, chatId: tgChatId, text });
     } catch (e) {
       console.error("[contact] telegram send failed", e);
-      // не валим заявку — просто логируем
+      // Не валим заявку, если Telegram упал. Просто логируем ошибку.
     }
   }
 

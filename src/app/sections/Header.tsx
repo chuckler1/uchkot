@@ -27,7 +27,7 @@ function Header() {
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const goToContacts = () => router.push("/#contacts");
-  // Закрытие меню при клике вне его
+  // Закрываем меню, если кликнули вне него.
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -81,7 +81,7 @@ function Header() {
             <Menu />
           </button>
 
-          {/* Дропдаун меню */}
+          {/* Выпадающее меню. */}
           <div
             className={`absolute text-xl right-0 w-auto top-full mt-2 px-4 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50 transition-all duration-200 ease-in-out ${
               isMenuOpen
