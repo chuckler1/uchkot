@@ -54,7 +54,8 @@ async function main() {
   }
 
   // Reduce archive size in Amvera: these are not needed at runtime for standalone server.
-  const cleanupTargets = [path.join(root, "node_modules"), path.join(root, ".git"), path.join(nextDir, "cache")];
+  // Important: do NOT delete .git — Amvera reads git metadata after archiving.
+  const cleanupTargets = [path.join(root, "node_modules"), path.join(nextDir, "cache")];
 
   for (const target of cleanupTargets) {
     if (!(await exists(target))) continue;
