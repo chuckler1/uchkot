@@ -45,8 +45,8 @@ const Contacts = () => {
                     className="flex items-center gap-2"
                   >
                     <a
-                      href={`tel:${phone.replace(/[^+\\d]/g, "")}`}
-                      className="text-sm text-[var(--secondary)] hover:text-[var(--foreground)] underline-offset-2 hover:underline transition-colors"
+                      href={`tel:${phone.replace(/[^+\d]/g, "")}`}
+                      className="text-sm text-[var(--secondary)] hover:text-[var(--foreground)] underline-offset-2 hover:underline transition-colors active:text-[var(--foreground)]"
                       aria-label={`Позвонить по номеру ${phone}`}
                     >
                       {phone}
@@ -54,7 +54,7 @@ const Contacts = () => {
                     <button
                       type="button"
                       aria-label={`Скопировать номер ${phone}`}
-                      className="p-1 rounded hover:bg-[var(--foreground)]/10 transition-colors group"
+                      className="p-1 rounded hover:bg-[var(--foreground)]/10 transition-colors active:bg-[var(--foreground)]/30 group"
                       onClick={() => navigator.clipboard.writeText(phone)}
                       title="Скопировать"
                     >
@@ -84,7 +84,7 @@ const Contacts = () => {
               </h3>
               <a
                 href={vkLink}
-                className="text-sm text-[var(--secondary)] hover:text-[var(--foreground)] underline-offset-2 hover:underline transition-colors"
+                className="text-sm text-[var(--secondary)] hover:text-[var(--foreground)] underline-offset-2 hover:underline transition-colors active:text-[var(--foreground)]"
                 aria-label="Открыть ВКонтакте"
                 target="_blank"
                 rel="nofollow noopener noreferrer"
@@ -105,7 +105,7 @@ const Contacts = () => {
               <div className="flex items-center gap-2">
                 <a
                   href={`mailto:${emailAddress}`}
-                  className="text-sm text-[var(--secondary)] hover:text-[var(--foreground)] underline-offset-2 hover:underline transition-colors"
+                  className="text-sm text-[var(--secondary)] hover:text-[var(--foreground)] underline-offset-2 hover:underline transition-colors active:text-[var(--foreground)]"
                   aria-label={`Написать на адрес ${emailAddress}`}
                   rel="nofollow noopener"
                 >
@@ -114,7 +114,7 @@ const Contacts = () => {
                 <button
                   type="button"
                   aria-label="Скопировать email"
-                  className="p-1 rounded hover:bg-[var(--foreground)]/10 transition-colors group"
+                  className="p-1 rounded hover:bg-[var(--foreground)]/10 transition-colors group active:bg-[var(--foreground)]/30"
                   onClick={() => navigator.clipboard.writeText(emailAddress)}
                   title="Скопировать"
                 >

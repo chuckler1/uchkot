@@ -153,15 +153,15 @@ const Scroller = () => {
                     <p className="text-[var(--secondary)] leading-relaxed">
                       {card.description}
                     </p>
-                    <div className="pt-2">
-                      {/* TODO: Добавить кнопку, когда появятся страницы/разделы программ. */}
-                      {/* <button className="text-[var(--foreground)] font-semibold hover:text-[var(--foreground)]/80 transition-colors flex items-center gap-2">
+                    {/* <div className="pt-2">
+                       TODO: Добавить кнопку, когда появятся страницы/разделы программ.
+                      <button className="text-[var(--foreground)] font-semibold hover:text-[var(--foreground)]/80 transition-colors flex items-center gap-2">
                         Узнать больше
                         <span className="transform transition-transform group-hover:translate-x-1">
                           →
                         </span>
-                      </button> */}
-                    </div>
+                      </button>
+                    </div> */}
                   </div>
                 </div>
               ))}
@@ -185,14 +185,14 @@ const Scroller = () => {
                   <p className="text-[var(--secondary)] leading-relaxed">
                     {card.description}
                   </p>
-                  <div className="pt-2">
+                  {/* <div className="pt-2">
                     <button className="text-[var(--foreground)] font-semibold hover:text-[var(--foreground)]/80 transition-colors flex items-center gap-2">
                       Узнать больше
                       <span className="transform transition-transform group-hover:translate-x-1">
                         →
                       </span>
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ))}
