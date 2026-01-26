@@ -10,7 +10,7 @@ export const FooterVariant3 = () => {
         <div className="flex flex-col gap-8">
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <Image src="/logo.png" alt="logo" width={50} height={50} />
+              <Image src="/logo.png" alt="Учёный Кот — логотип" width={50} height={50} />
               <div>
                 <p className="font-neucha text-2xl">{organizationName}</p>
                 <p className="text-sm text-[var(--secondary)]">

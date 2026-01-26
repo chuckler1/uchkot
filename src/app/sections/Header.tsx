@@ -49,7 +49,7 @@ function Header() {
     <header>
       <div className="container mx-auto max-w-5xl flex justify-between items-center bg-white shadow-md px-4 py-2">
         <div className="flex items-center gap-2">
-          <Image src="/logo.png" alt="logo" width={50} height={50} />
+          <Image src="/logo.png" alt="Учёный Кот — логотип" width={50} height={50} />
           <div className="flex flex-col">
             <p className="font-neucha text-2xl md:text-3xl lg:text-4xl">
               Учёный Кот
