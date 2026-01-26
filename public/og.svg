@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -33,20 +34,20 @@
 
   <!-- Text -->
   <text x="270" y="182" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="52" font-weight="800" fill="#0b1220">
-    ?????? ???
+    &#x423;&#x447;&#x451;&#x43D;&#x44B;&#x439;&#x20;&#x41A;&#x43E;&#x442;
   </text>
   <text x="270" y="222" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="28" font-weight="600" fill="rgba(11,18,32,0.70)">
-    ?????? ??????? ????????
+    &#x421;&#x442;&#x443;&#x434;&#x438;&#x44F;&#x20;&#x440;&#x430;&#x43D;&#x43D;&#x435;&#x433;&#x43E;&#x20;&#x440;&#x430;&#x437;&#x432;&#x438;&#x442;&#x438;&#x44F;
   </text>
 
   <text x="120" y="340" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="58" font-weight="800" fill="#0b1220">
-    ??????? ??? ????? 3?7 ???
+    &#x417;&#x430;&#x43D;&#x44F;&#x442;&#x438;&#x44F;&#x20;&#x434;&#x43B;&#x44F;&#x20;&#x434;&#x435;&#x442;&#x435;&#x439;&#x20;&#x33;&#x2013;&#x37;&#x20;&#x43B;&#x435;&#x442;
   </text>
   <text x="120" y="392" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="30" font-weight="600" fill="rgba(11,18,32,0.78)">
-    ?????????? ? ????? · ?????????? · ???????? ? ?????? ?????????
+    &#x41F;&#x43E;&#x434;&#x433;&#x43E;&#x442;&#x43E;&#x432;&#x43A;&#x430;&#x20;&#x43A;&#x20;&#x448;&#x43A;&#x43E;&#x43B;&#x435;&#x20;&#xB7;&#x20;&#x442;&#x432;&#x43E;&#x440;&#x447;&#x435;&#x441;&#x442;&#x432;&#x43E;&#x20;&#xB7;&#x20;&#x440;&#x430;&#x437;&#x432;&#x438;&#x442;&#x438;&#x435;&#x20;&#x432;&#x20;&#x443;&#x44E;&#x442;&#x43D;&#x43E;&#x439;&#x20;&#x430;&#x442;&#x43C;&#x43E;&#x441;&#x444;&#x435;&#x440;&#x435;
   </text>
   <text x="120" y="446" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="24" font-weight="600" fill="rgba(11,18,32,0.60)">
-    ?????????? · u4kot.ru
+    &#x419;&#x43E;&#x448;&#x43A;&#x430;&#x440;&#x2011;&#x41E;&#x43B;&#x430;&#x20;&#xB7;&#x20;&#x75;&#x34;&#x6B;&#x6F;&#x74;&#x2E;&#x72;&#x75;
   </text>
 </svg>
 
