@@ -168,7 +168,7 @@ const Contacts = () => {
               ))}
             </div>
           </div>
-          <div className="mt-6 bg-white/80 rounded-2xl shadow-sm border border-gray-200 p-6">
+          <div id="feedback" className="mt-6 bg-white/80 rounded-2xl shadow-sm border border-gray-200 p-6">
             <ContactForm />
           </div>
         </div>
