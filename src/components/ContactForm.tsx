@@ -66,6 +66,9 @@ export default function ContactForm(): React.JSX.Element {
       <h3 className="text-xl font-semibold text-[var(--foreground)] mb-4">
         Записаться на пробное занятие
       </h3>
+      <p className="text-sm text-[var(--secondary)] mb-4">
+        Заполните форму и мы свяжемся с вами в ближайшее время.
+      </p>
       {/* Honeypot: скрытое поле для защиты от спам-ботов. */}
       <div className="hidden" aria-hidden>
         <Input

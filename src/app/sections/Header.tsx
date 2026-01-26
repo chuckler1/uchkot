@@ -26,7 +26,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const goToContacts = () => router.push("/#contacts");
+  const goToContacts = () => router.push("/#feedback");
   // Закрываем меню, если кликнули вне него.
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

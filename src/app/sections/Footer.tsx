@@ -7,7 +7,7 @@ export const FooterVariant3 = () => {
   return (
     <footer className="bg-gradient-to-b from-white to-[var(--background)] border-t border-gray-200">
       <div className="container mx-auto max-w-5xl px-4 py-12">
-        <div className="flex flex-col gap-8 mb-8">
+        <div className="flex flex-col gap-8">
           <div>
             <div className="flex items-center gap-3 mb-6">
               <Image src="/logo.png" alt="logo" width={50} height={50} />
@@ -23,7 +23,7 @@ export const FooterVariant3 = () => {
               обучение. Создаём комфортную и безопасную среду для развития
               малышей от 3 до 7 лет.
             </p>
-            <div className="flex justify-center items-center gap-2 border-t pt-4 border-gray-200">
+            <div className="flex justify-center items-center border-t py-4 border-gray-200">
               <a
                 href="https://vk.com/kot_yo"
                 className="flex items-center gap-2 text-sm text-[var(--secondary)] hover:text-[var(--foreground)] transition-colors"
@@ -44,7 +44,7 @@ export const FooterVariant3 = () => {
         </div>
 
         {/* Нижняя часть футера. */}
-        <div className="pt-8 border-t border-gray-200">
+        <div className="pt-4 border-t border-gray-200">
           <div className="flex justify-center">
             <p className="text-xs text-[var(--secondary)] text-center md:text-left">
               © {new Date().getFullYear()} Учёный Кот. Все права защищены.
