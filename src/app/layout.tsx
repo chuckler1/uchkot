@@ -26,6 +26,12 @@ export const metadata: Metadata = {
   },
   description:
     "Студия раннего развития «Учёный Кот» в Йошкар‑Оле: занятия для детей 3–7 лет, подготовка к школе, творчество и развитие в уютной атмосфере.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+  },
   alternates: {
     canonical: "/",
   },
