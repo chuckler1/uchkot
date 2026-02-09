@@ -1,6 +1,7 @@
 "use client";
 
-import { Phone, Mail, MapPin, Copy, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Copy, Clock, Check } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import {
   phoneNumbers,
   emailAddress,
@@ -10,7 +11,63 @@ import {
 } from "@/data/contacts";
 import ContactForm from "@/components/ContactForm";
 
+async function copyToClipboard(text: string) {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+  
+  }
+
+  // Fallback for older browsers / non-secure contexts.
+  try {
+    const el = document.createElement("textarea");
+    el.value = text;
+    el.setAttribute("readonly", "");
+    el.style.position = "fixed";
+    el.style.top = "-1000px";
+    el.style.left = "-1000px";
+    document.body.appendChild(el);
+    el.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(el);
+    return ok;
+  } catch {
+    return false;
+  }
+}
+
 const Contacts = () => {
+  const [copyState, setCopyState] = useState<{ key: string; ok: boolean } | null>(
+    null,
+  );
+  const hideTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (hideTimerRef.current !== null) {
+        window.clearTimeout(hideTimerRef.current);
+      }
+    };
+  }, []);
+
+  const showCopyToast = (next: { key: string; ok: boolean }) => {
+    setCopyState(next);
+    if (hideTimerRef.current !== null) {
+      window.clearTimeout(hideTimerRef.current);
+    }
+    hideTimerRef.current = window.setTimeout(() => {
+      setCopyState(null);
+    }, 1400);
+  };
+
+  const handleCopy = async (key: string, text: string) => {
+    const ok = await copyToClipboard(text);
+    showCopyToast({ key, ok });
+  };
+
   return (
     <section
       id="contacts"
@@ -51,15 +108,44 @@ const Contacts = () => {
                     >
                       {phone}
                     </a>
-                    <button
-                      type="button"
-                      aria-label={`Скопировать номер ${phone}`}
-                      className="p-1 rounded hover:bg-[var(--foreground)]/10 transition-colors active:bg-[var(--foreground)]/30 group"
-                      onClick={() => navigator.clipboard.writeText(phone)}
-                      title="Скопировать"
-                    >
-                      <Copy className="w-4 h-4 text-[var(--secondary)] group-hover:text-[var(--foreground)] transition-colors" />
-                    </button>
+                    <span className="relative inline-flex">
+                      <button
+                        type="button"
+                        aria-label={`Скопировать номер ${phone}`}
+                        className="p-1 rounded hover:bg-[var(--foreground)]/10 transition-colors active:bg-[var(--foreground)]/30 group"
+                        onClick={() => handleCopy(`phone:${phone}`, phone)}
+                        title="Скопировать"
+                      >
+                        {copyState?.key === `phone:${phone}` && copyState.ok ? (
+                          <Check className="w-4 h-4 text-[var(--foreground)] transition-colors" />
+                        ) : (
+                          <Copy className="w-4 h-4 text-[var(--secondary)] group-hover:text-[var(--foreground)] transition-colors" />
+                        )}
+                      </button>
+                      <span
+                        role="status"
+                        aria-live="polite"
+                        className={[
+                          "pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap",
+                          "rounded-lg px-2 py-1 text-xs shadow-md",
+                          "bg-[var(--foreground)] text-[var(--background)]",
+                          "transition-all duration-150",
+                          copyState?.key === `phone:${phone}`
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-1",
+                        ].join(" ")}
+                      >
+                        {copyState?.key === `phone:${phone}` ? (
+                          copyState.ok ? (
+                            "Скопировано"
+                          ) : (
+                            "Не удалось"
+                          )
+                        ) : (
+                          <span className="sr-only"> </span>
+                        )}
+                      </span>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -111,15 +197,44 @@ const Contacts = () => {
                 >
                   {emailAddress}
                 </a>
-                <button
-                  type="button"
-                  aria-label="Скопировать email"
-                  className="p-1 rounded hover:bg-[var(--foreground)]/10 transition-colors group active:bg-[var(--foreground)]/30"
-                  onClick={() => navigator.clipboard.writeText(emailAddress)}
-                  title="Скопировать"
-                >
-                  <Copy className="w-4 h-4 text-[var(--secondary)] group-hover:text-[var(--foreground)] transition-colors" />
-                </button>
+                <span className="relative inline-flex">
+                  <button
+                    type="button"
+                    aria-label="Скопировать email"
+                    className="p-1 rounded hover:bg-[var(--foreground)]/10 transition-colors group active:bg-[var(--foreground)]/30"
+                    onClick={() => handleCopy("email", emailAddress)}
+                    title="Скопировать"
+                  >
+                    {copyState?.key === "email" && copyState.ok ? (
+                      <Check className="w-4 h-4 text-[var(--foreground)] transition-colors" />
+                    ) : (
+                      <Copy className="w-4 h-4 text-[var(--secondary)] group-hover:text-[var(--foreground)] transition-colors" />
+                    )}
+                  </button>
+                  <span
+                    role="status"
+                    aria-live="polite"
+                    className={[
+                      "pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap",
+                      "rounded-lg px-2 py-1 text-xs shadow-md",
+                      "bg-[var(--foreground)] text-[var(--background)]",
+                      "transition-all duration-150",
+                      copyState?.key === "email"
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-1",
+                    ].join(" ")}
+                  >
+                    {copyState?.key === "email" ? (
+                      copyState.ok ? (
+                        "Скопировано"
+                      ) : (
+                        "Не удалось"
+                      )
+                    ) : (
+                      <span className="sr-only"> </span>
+                    )}
+                  </span>
+                </span>
               </div>
             </div>
           </div>
