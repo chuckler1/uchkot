@@ -93,6 +93,9 @@ export default function ContactForm(): React.JSX.Element {
 
       <Input
         type="tel"
+        autoComplete="tel"
+        inputMode="tel"
+        enterKeyHint="done"
         name="phone"
         value={formData.phone}
         onChange={handleChange}
@@ -103,6 +106,8 @@ export default function ContactForm(): React.JSX.Element {
 
       <Input
         type="email"
+        autoComplete="email"
+        inputMode="email"
         name="email"
         value={formData.email}
         onChange={handleChange}

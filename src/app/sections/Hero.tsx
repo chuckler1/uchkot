@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 const Hero = () => {
   const router = useRouter();
-  const goToContacts = () => router.push("/#contacts");
+  const goToContacts = () => router.push("/#feedback");
   const goToAbout = () => router.push("/#about");
   return (
     <section className="container mx-auto max-w-5xl flex flex-col items-center gap-6 p-6 my-20">
